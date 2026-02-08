@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1><i class="fas fa-robot"></i> AI Chat Assistant</h1>
+            <div class="controls">
+                <select id="modelSelect">
+                    <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                    <option value="gpt-4">GPT-4</option>
+                    <option value="llama2">Llama 2</option>
+                    <option value="mistral">Mistral</option>
+                </select>
+                <button id="clearChat" title="Clear chat">
+                    <i class="fas fa-trash"></i>
+                </button>
+                <button id="settingsBtn" title="Settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Chat Messages Container -->
+        <div id="chatContainer">
+            <div id="chatMessages">
+                <!-- Messages will appear here -->
+                <div class="message ai">
+                    <div class="avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="content">
+                        <div class="text">
+                            Hello! I'm your AI assistant. How can I help you today?
+                        </div>
+                        <div class="timestamp" id="welcome-time"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Token Counter -->
+            <div id="tokenCounter">
+                <span id="tokenCount">0</span> tokens
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+            <div class="input-wrapper">
+                <textarea 
+                    id="userInput" 
+                    placeholder="Type your message here... (Shift+Enter for new line, Enter to send)" 
+                    rows="1"
+                ></textarea>
+                <button id="sendButton">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="input-footer">
+                <label>
+                    <input type="checkbox" id="streamToggle" checked>
+                    Stream responses
+                </label>
+                <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                    <i class="fas fa-ellipsis-h"></i> AI is typing...
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <h2><i class="fas fa-cog"></i> Settings</h2>
+                <div class="setting-group">
+                    <label for="temperature">Temperature: <span id="tempValue">0.7</span></label>
+                    <input type="range" id="temperature" min="0" max="2" step="0.1" value="0.7">
+                    <small>Higher values = more creative, Lower values = more focused</small>
+                </div>
+                <div class="setting-group">
+                    <label for="maxTokens">Max Tokens: <span id="tokenValue">500</span></label>
+                    <input type="range" id="maxTokens" min="50" max="2000" step="50" value="500">
+                    <small>Maximum length of AI response</small>
+                </div>
+                <div class="setting-group">
+                    <label for="apiUrl">API URL:</label>
+                    <input type="text" id="apiUrl" value="http://localhost:8000">
+                    <small>Backend server address</small>
+                </div>
+                <div class="modal-buttons">
+                    <button id="saveSettings">Save</button>
+                    <button id="closeSettings">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
